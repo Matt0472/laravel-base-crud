@@ -37,7 +37,20 @@ class WineController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+
+        $wine = new Wine;
+        $wine->cantina = $data['cantina'];
+        $wine->etichetta = $data['etichetta'];
+        $wine->annata = $data['annata'];
+        $wine->vitigno = $data['vitigno'];
+        $wine->descrizione = $data['descrizione'];
+        $wine->prezzo = $data['prezzo'];
         
+        $saved = $wine->save();
+        if($saved) {
+            return redirect()->route('wines.index');
+        }
     }
 
     /**
