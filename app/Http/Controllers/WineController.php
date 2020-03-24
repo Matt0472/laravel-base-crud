@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 
 class WineController extends Controller
 {
-    private $validationShoe = [
+    private $validationWine = [
         'cantina' => 'required|string|max:40',
         'etichetta' => 'required|string|max:100',
         'annata' => 'required|string|max:4',
-        'vitigno' => 'required|char|max:100',
-        'descrizione' => 'required|longText',
+        'vitigno' => 'required|max:100',
+        'descrizione' => 'required',
         'prezzo' => 'required|numeric|min:1|max:9999.99'
     ];
     /**
@@ -122,13 +122,13 @@ class WineController extends Controller
      */
     public function destroy(Wine $wine)
     {
-        // $id = $shoe->id;
-        // $deleted = $shoe->delete();
-        // $data = [
-        //     'id' => $id,
-        //     'shoes' => Shoe::all()
-        // ];
+        $id = $wine->id;
+        $deleted = $wine->delete();
+        $data = [
+            'id' => $id,
+            'wines' => Wine::all()
+        ];
 
-        // return view('shoes.index', $data);
+        return view('wines.index', $data);
     }
 }

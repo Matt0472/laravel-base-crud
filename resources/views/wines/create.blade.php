@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('wines.layouts.layout')
   <h1 class="text-center">Inserisci un nuovo vino in cantina</h1>
   <div class="form-group container">
     <form action="{{route('wines.store')}}" method="post">

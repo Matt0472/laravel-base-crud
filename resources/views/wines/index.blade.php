@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('wines.layouts.layout')
   
     @section('main-content')
       <div class="wrapper">
@@ -13,6 +13,7 @@
             <th scope="col">Annata</th>
             <th scope="col">Descrizione</th>
             <th scope="col">Prezzo</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@
               <td>{{$wine->annata}}</td>
               <td>{{$wine->descrizione}}</td>
               <td>{{$wine->prezzo}},00€</td>
+              <td><a class="btn btn-danger" href="">DELETE</a></td>
             </tr>
           @endforeach
         </tbody>
