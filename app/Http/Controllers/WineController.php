@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class WineController extends Controller
 {
+    private $validationShoe = [
+        'cantina' => 'required|string|max:40',
+        'etichetta' => 'required|string|max:100',
+        'annata' => 'required|string|max:4',
+        'vitigno' => 'required|char|max:100',
+        'descrizione' => 'required|longText',
+        'prezzo' => 'required|numeric|min:1|max:9999.99'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -38,19 +46,18 @@ class WineController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $request->validate($this->validationWine);
 
         $wine = new Wine;
-        $wine->cantina = $data['cantina'];
-        $wine->etichetta = $data['etichetta'];
-        $wine->annata = $data['annata'];
-        $wine->vitigno = $data['vitigno'];
-        $wine->descrizione = $data['descrizione'];
-        $wine->prezzo = $data['prezzo'];
+
+        $wine->fill($data);
         
         $saved = $wine->save();
         if($saved) {
-            return redirect()->route('wines.index');
+            $wine = Wine::orderBy('id', 'desc')->first();
+            return redirect()->route('wines.show', compact('wine'));
         }
+        dd('Vino non salvato correttamente!');
     }
 
     /**
@@ -59,9 +66,13 @@ class WineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Wine $wine)
     {
-        //
+        if (empty($wine)) {
+            abort('404');
+        }
+        
+        return view('wines.show', compact('wine'));
     }
 
     /**
@@ -70,9 +81,13 @@ class WineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Wine $wine)
     {
-        //
+        if (empty($wine)) {
+            abort('404');
+        }
+
+        return view('wines.create', compact('wine'));
     }
 
     /**
@@ -84,7 +99,19 @@ class WineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $wine = Wine::find($id);
+        
+        if (empty($wine)) {
+            abort('404');
+        }
+
+        $data = $request->all();
+        $request->validate($this->validationWine);
+        $updated = $shoe->update($data);
+        if ($updated) {
+            $wine = Wine::find($id);
+            return redirect()->route('wines.show', compact('wine'));
+        }
     }
 
     /**
@@ -93,8 +120,15 @@ class WineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Wine $wine)
     {
-        //
+        // $id = $shoe->id;
+        // $deleted = $shoe->delete();
+        // $data = [
+        //     'id' => $id,
+        //     'shoes' => Shoe::all()
+        // ];
+
+        // return view('shoes.index', $data);
     }
 }

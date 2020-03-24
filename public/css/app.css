@@ -10888,3 +10888,11 @@ a.text-dark:focus {
   box-sizing: border-box;
 }
 
+.container-fluid,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl {
+  margin-top: 100px;
+}
+

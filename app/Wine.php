@@ -8,7 +8,7 @@ class Wine extends Model
 {
     protected $fillable = [
         'cantina',
-        'produttore',
+        'etichetta',
         'annata',
         'vitigno',
         'descrizione',
