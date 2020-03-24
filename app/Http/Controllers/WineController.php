@@ -107,7 +107,7 @@ class WineController extends Controller
 
         $data = $request->all();
         $request->validate($this->validationWine);
-        $updated = $shoe->update($data);
+        $updated = $wine->update($data);
         if ($updated) {
             $wine = Wine::find($id);
             return redirect()->route('wines.show', compact('wine'));
