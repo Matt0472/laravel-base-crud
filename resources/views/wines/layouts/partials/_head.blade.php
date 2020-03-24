@@ -20,10 +20,7 @@
         <a class="nav-link" href="{{route('wines.index')}}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{route('wines.create')}}">Create</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Update</a>
+        <a class="nav-link" href="{{route('wines.create')}}">Create/Update</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
