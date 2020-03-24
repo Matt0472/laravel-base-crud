@@ -25,10 +25,17 @@
               <td>{{$wine->annata}}</td>
               <td>{{$wine->descrizione}}</td>
               <td>{{$wine->prezzo}},00€</td>
-              <td><a class="btn btn-danger" href="">DELETE</a></td>
+              <td>
+                <form action="{{route('wines.destroy', $wine->id)}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger" type="submit">DELETE</button>
+                </form>
+              </td>
             </tr>
           @endforeach
         </tbody>
       </table>
     @endsection
   
+    
